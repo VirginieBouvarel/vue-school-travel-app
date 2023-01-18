@@ -9,22 +9,18 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        destination: null,
-      };
+import sourceData from '@/data.json';
+
+export default {
+  computed: {
+    destinationId() {
+        return parseInt(this.$route.params.id);
     },
-    methods: {
-      async initData() {
-        const response = fetch(`https://travel-dummy-api.netlify.app/${this.$route.params.slug}`);
-        this.destination = await response.json();
-      },
-    },
-    async created() {
-      this.initData();
+    destination() {
+      return sourceData.destinations.find(destination => destination.id === this.destinationId);
     }
-  }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
