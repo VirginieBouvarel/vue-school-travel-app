@@ -5,6 +5,10 @@ import sourceData from '@/data.json'
 const routes = [
   { path: '/', name: 'Home', component: Home},
   { 
+    path: '/example/:id?', 
+    component: () => import('@/views/Login.vue'),
+  },
+  { 
     path: '/protected', 
     name: 'protected', 
     component: () => import('@/views/Protected.vue'),
