@@ -12,20 +12,23 @@
 </template>
 
 <script>
+  import { ref } from 'vue';
+  import { useRouter, useRoute } from 'vue-router';
+
   export default {
-    data() {
-      return {
-        username: '',
-        password:'',
+    setup() {
+      const username = ref('');
+      const password = ref('');
+      const route = useRoute();
+      const router = useRouter();
+
+      const login = () => {
+        window.user = username.value;
+        const redirectPath = route.query.redirect || '/protected';
+        router.push(redirectPath);
       }
+      return { username, password, login };
     },
-    methods: {
-      login() {
-        window.user = this.username;
-        const redirectPath = this.$route.query.redirect || '/protected';
-        this.$router.push(redirectPath);
-      }
-    }
   }
 </script>
 
